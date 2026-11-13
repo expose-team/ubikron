@@ -1,0 +1,13 @@
+{
+  "data": {
+    "id": "sampleSchoolId01",
+    "domain": "stanford.edu",
+    "is_school": true,
+    "founded": 1891,
+    "industries": [{ "name": "HIGHER_EDUCATION" }],
+    "names": [{ "first_name": "stanford university", "middle_name": null, "last_name": null }],
+    "profiles": [{ "network": "linkedin", "url": "linkedin.com/school/stanford-university" }],
+    "locations": [{ "city": "stanford", "state": "ca", "country": "united states" }],
+    "websites": ["https://www.stanford.edu"]
+  }
+}

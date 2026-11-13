@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "engine": { "name": "jsonata", "version": "2.2.1" },
+  "titleExpression": null,
+  "variables": [
+    {
+      "name": "records",
+      "expression": "$type(data) = 'array' ? data : ($type(data) = 'object' and $count($keys(data)) > 1) ? [data] : []"
+    }
+  ],
+  "sections": [
+    {
+      "ref": "miss",
+      "titleExpression": "'No report'",
+      "blocks": [
+        {
+          "kind": "properties",
+          "fields": [
+            {
+              "ref": "searched",
+              "label": "Searched",
+              "expression": "$count($records) = 0 ? $input.mainProperty.value : ''"
+            },
+            {
+              "ref": "credit",
+              "label": "Expose credit",
+              "expression": "$count($records) = 0 ? 'Used' : ''"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ref": "match",
+      "titleExpression": "__TITLE__",
+      "repeatExpression": "$records",
+      "itemTitleExpression": "($parts := $filter([names[0].first_name, names[0].middle_name, names[0].last_name], function($part) { $part != null and $trim($string($part)) != '' }); $name := $join($parts.$titlecase($), ' '); $name != '' ? $name : (domain ? $lowercase(domain) : $input.mainProperty.value))",
+      "blocks": [
+        {
+          "kind": "image",
+          "urlExpression": "profiles[profile_picture != null and $trim($string(profile_picture)) != ''][0].profile_picture",
+          "altExpression": "($parts := $filter([names[0].first_name, names[0].middle_name, names[0].last_name], function($part) { $part != null and $trim($string($part)) != '' }); $join($parts.$titlecase($), ' '))"
+        },
+        {
+          "kind": "properties",
+          "fields": [
+            {
+              "ref": "domain",
+              "label": "Domain",
+              "entityType": "ubikron.domain",
+              "expression": "domain ? $lowercase($string(domain)) : ''"
+            },
+            {
+              "ref": "websites",
+              "label": "Website",
+              "entityType": "ubikron.url",
+              "expression": "websites[$type($) = 'string' and $trim($) != ''].($contains($, '://') ? $ : 'https://' & $)"
+            },
+            {
+              "ref": "profiles",
+              "label": "Profile",
+              "entityType": "ubikron.url",
+              "expression": "profiles.url[$ != null and $trim($string($)) != ''].($contains($, '://') ? $ : 'https://' & $)"
+            },
+            {
+              "ref": "size",
+              "label": "Size",
+              "expression": "company_size_range ? $string(company_size_range) : ''"
+            },
+            {
+              "ref": "founded",
+              "label": "Founded",
+              "expression": "founded ? founded : ''"
+            },
+            {
+              "ref": "industries",
+              "label": "Industry",
+              "expression": "industries.name[$ != null and $trim($string($)) != ''].$titlecase($replace($lowercase($), /_+/, ' '))"
+            },
+            {
+              "ref": "specialities",
+              "label": "Speciality",
+              "expression": "specialities[$type($) = 'string' and $trim($) != ''].$titlecase($)"
+            },
+            {
+              "ref": "description",
+              "label": "Description",
+              "expression": "$join(titles[$type($) = 'string' and $trim($) != ''].$titlecase($), ' ')"
+            },
+            {
+              "ref": "locations",
+              "label": "Location",
+              "expression": "locations.($join($filter([city, state, country], function($part) { $part != null and $trim($string($part)) != '' }).$titlecase($), ', '))"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "scopes": [
+      {
+        "scopeRef": "match",
+        "limit": 20,
+        "children": [
+          {
+            "id": "match-domain",
+            "ref": "domain",
+            "label": "domain",
+            "children": [
+              { "id": "match-websites", "ref": "websites", "label": "website" },
+              { "id": "match-profiles", "ref": "profiles", "label": "profile" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

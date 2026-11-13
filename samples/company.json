@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "sampleCompanyId01",
+    "domain": "acme.com",
+    "is_school": false,
+    "company_size_range": "51-200",
+    "founded": 2015,
+    "titles": ["building the future of widgets"],
+    "specialities": ["widgets", "logistics software"],
+    "industries": [{ "name": "SOFTWARE_DEVELOPMENT" }],
+    "names": [{ "first_name": "acme inc", "middle_name": null, "last_name": null }],
+    "profiles": [{ "network": "linkedin", "username": "acme", "url": "linkedin.com/company/acme" }],
+    "locations": [{ "city": "san francisco", "country": "united states", "state": "ca" }],
+    "websites": ["https://www.acme.com"]
+  }
+}

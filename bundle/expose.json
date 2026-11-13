@@ -1,0 +1,163 @@
+{
+  "format": "mimic-bundle",
+  "version": 1,
+  "exported_at": "2026-11-13T00:00:00Z",
+  "source": {
+    "mimic_version": "1.7.1"
+  },
+  "entity_types": [],
+  "links": [],
+  "providers": [
+    {
+      "slug": "expose",
+      "display_name": "Expose",
+      "system": false,
+      "status": "untested",
+      "signup_url": "https://expose.team/platform/access/api",
+      "icon_url": "https://expose.team/logos/expose.svg",
+      "secret_definitions": [
+        {
+          "secret_name": "api_key",
+          "display_name": "Expose API key",
+          "required": true
+        }
+      ],
+      "modifiers": [],
+      "endpoints": [
+        {
+          "slug": "person-email",
+          "display_name": "Person by email",
+          "description": "Search Expose for a person by email address. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=person&email={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.email-address",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "person"
+        },
+        {
+          "slug": "person-phone",
+          "display_name": "Person by phone",
+          "description": "Search Expose for a person by phone number. Include the country code. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=person&phone={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.phone-number",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "person"
+        },
+        {
+          "slug": "person-profile",
+          "display_name": "Person by profile URL",
+          "description": "Search Expose for a person by profile URL. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=person&profile_url={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.url",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "person"
+        },
+        {
+          "slug": "company-domain",
+          "display_name": "Company by domain",
+          "description": "Search Expose for a company by domain. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=company&domain={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.domain",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "company"
+        },
+        {
+          "slug": "company-profile",
+          "display_name": "Company by profile URL",
+          "description": "Search Expose for a company by profile URL. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=company&profile_url={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.url",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "company"
+        },
+        {
+          "slug": "school-domain",
+          "display_name": "School by domain",
+          "description": "Search Expose for a school by domain. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=school&domain={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.domain",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "school"
+        },
+        {
+          "slug": "school-profile",
+          "display_name": "School by profile URL",
+          "description": "Search Expose for a school by profile URL. One completed search uses one Expose credit.",
+          "endpoint_url": "https://expose.team/api/search?type=school&profile_url={{__INPUT__}}",
+          "method": "GET",
+          "request_config": {
+            "headers": {
+              "x-api-key": "{{api_key}}",
+              "accept": "application/json",
+              "source": "ubikron"
+            }
+          },
+          "credit_cost": 1,
+          "status": "untested",
+          "entity_type": "ubikron.url",
+          "entity_type_inputs": [{ "property_name": "__INPUT__" }],
+          "mapping": "school"
+        }
+      ]
+    }
+  ]
+}

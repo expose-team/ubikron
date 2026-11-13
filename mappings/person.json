@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "engine": { "name": "jsonata", "version": "2.2.1" },
+  "titleExpression": null,
+  "variables": [
+    {
+      "name": "records",
+      "expression": "$type(data) = 'array' ? data : ($type(data) = 'object' and $count($keys(data)) > 1) ? [data] : []"
+    }
+  ],
+  "sections": [
+    {
+      "ref": "miss",
+      "titleExpression": "'No report'",
+      "blocks": [
+        {
+          "kind": "properties",
+          "fields": [
+            {
+              "ref": "searched",
+              "label": "Searched",
+              "expression": "$count($records) = 0 ? $input.mainProperty.value : ''"
+            },
+            {
+              "ref": "credit",
+              "label": "Expose credit",
+              "expression": "$count($records) = 0 ? 'Used' : ''"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ref": "match",
+      "titleExpression": "'Person'",
+      "repeatExpression": "$records",
+      "itemTitleExpression": "($parts := $filter([names[0].first_name, names[0].middle_name, names[0].last_name], function($part) { $part != null and $trim($string($part)) != '' }); $name := $join($parts.$titlecase($), ' '); $name != '' ? $name : $input.mainProperty.value)",
+      "titleValue": {
+        "ref": "name",
+        "label": "Name",
+        "entityType": "ubikron.person"
+      },
+      "blocks": [
+        {
+          "kind": "image",
+          "urlExpression": "profiles[profile_picture != null and $trim($string(profile_picture)) != ''][0].profile_picture",
+          "altExpression": "($parts := $filter([names[0].first_name, names[0].middle_name, names[0].last_name], function($part) { $part != null and $trim($string($part)) != '' }); $join($parts.$titlecase($), ' '))"
+        },
+        {
+          "kind": "properties",
+          "fields": [
+            {
+              "ref": "emails",
+              "label": "Email",
+              "entityType": "ubikron.email-address",
+              "expression": "emails.address[$ != null and $trim($string($)) != ''].$lowercase($)"
+            },
+            {
+              "ref": "phones",
+              "label": "Phone",
+              "entityType": "ubikron.phone-number",
+              "expression": "phones.number[$ != null and $trim($string($)) != '']"
+            },
+            {
+              "ref": "aliases",
+              "label": "Alias",
+              "entityType": "ubikron.alias",
+              "expression": "$distinct(profiles.username[$ != null and $trim($string($)) != ''])"
+            },
+            {
+              "ref": "profiles",
+              "label": "Profile",
+              "entityType": "ubikron.url",
+              "expression": "$distinct($append(profiles.url, external_urls)[$ != null and $trim($string($)) != ''].($contains($, '://') ? $ : 'https://' & $))"
+            },
+            {
+              "ref": "employers",
+              "label": "Employer domain",
+              "entityType": "ubikron.domain",
+              "expression": "$distinct(experiences.company.domain[$ != null and $trim($string($)) != ''].$lowercase($))"
+            },
+            {
+              "ref": "schools",
+              "label": "School domain",
+              "entityType": "ubikron.domain",
+              "expression": "$distinct(educations.school.domain[$ != null and $trim($string($)) != ''].$lowercase($))"
+            },
+            {
+              "ref": "skills",
+              "label": "Skills",
+              "expression": "$join(skills[$ != null and $trim($string($)) != ''].$string($), ', ')"
+            },
+            {
+              "ref": "locations",
+              "label": "Location",
+              "expression": "locations.($join($filter([city, state, country], function($part) { $part != null and $trim($string($part)) != '' }).$titlecase($), ', '))"
+            }
+          ]
+        },
+        {
+          "kind": "table",
+          "table": {
+            "ref": "experience",
+            "sourceExpression": "experiences",
+            "columns": [
+              { "ref": "role", "label": "Role", "expression": "title ? $titlecase(title) : ''" },
+              { "ref": "employer", "label": "Employer", "expression": "company_name ? $titlecase(company_name) : ''" },
+              {
+                "ref": "employer-domain",
+                "label": "Domain",
+                "entityType": "ubikron.domain",
+                "expression": "company.domain ? $lowercase(company.domain) : ''"
+              },
+              { "ref": "current", "label": "Current", "expression": "$yesNo(current)" },
+              { "ref": "started", "label": "Started", "expression": "start ? $date(start) : ''" }
+            ]
+          }
+        },
+        {
+          "kind": "table",
+          "table": {
+            "ref": "education",
+            "sourceExpression": "educations",
+            "columns": [
+              { "ref": "school-name", "label": "School", "expression": "school_name ? $titlecase(school_name) : ''" },
+              {
+                "ref": "school-domain",
+                "label": "Domain",
+                "entityType": "ubikron.domain",
+                "expression": "school.domain ? $lowercase(school.domain) : ''"
+              },
+              { "ref": "degree", "label": "Degree", "expression": "degree ? $titlecase(degree) : ''" },
+              { "ref": "started", "label": "Started", "expression": "start ? $date(start) : ''" },
+              { "ref": "ended", "label": "Ended", "expression": "end ? $date(end) : ''" }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "scopes": [
+      {
+        "scopeRef": "match",
+        "limit": 20,
+        "children": [
+          {
+            "id": "match-name",
+            "ref": "name",
+            "label": "report",
+            "promoteChildren": false,
+            "children": [
+              { "id": "match-emails", "ref": "emails", "label": "email" },
+              { "id": "match-phones", "ref": "phones", "label": "phone" },
+              { "id": "match-aliases", "ref": "aliases", "label": "alias" },
+              { "id": "match-profiles", "ref": "profiles", "label": "profile" },
+              { "id": "match-employers", "ref": "employers", "label": "works at" },
+              { "id": "match-schools", "ref": "schools", "label": "studied at" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

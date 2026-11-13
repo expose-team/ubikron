@@ -1,0 +1,11 @@
+{
+  "name": "expose-ubikron",
+  "private": true,
+  "description": "Expose searches as Ubikron Mimic enrichments.",
+  "scripts": {
+    "check": "node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "jsonata": "2.2.1"
+  }
+}

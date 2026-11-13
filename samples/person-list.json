@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "names": [{ "first_name": "jane", "last_name": "doe" }],
+      "emails": [{ "address": "jane.doe@example.com" }]
+    },
+    {
+      "names": [{ "first_name": "john", "last_name": "doe" }],
+      "emails": [{ "address": "john.doe@example.com" }]
+    }
+  ]
+}

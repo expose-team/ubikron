@@ -1,0 +1,5 @@
+node_modules/
+expose.bundle.json
+*.key
+.env
+__pycache__/

@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 12345678,
+    "external_urls": ["http://janedoe.io"],
+    "emails": [{ "address": "jane.doe@example.com", "type": "professional" }],
+    "phones": [{ "number": "+12025550123", "type": "mobile" }],
+    "names": [{ "first_name": "jane", "middle_name": null, "last_name": "doe" }],
+    "profiles": [
+      {
+        "username": "janedoe",
+        "url": "linkedin.com/in/janedoe",
+        "profile_picture": "https://stellarwind.expose.team/sample.jpg",
+        "network": "linkedin"
+      }
+    ],
+    "locations": [{ "city": "san francisco", "state": "ca", "country": "united states" }],
+    "experiences": [
+      {
+        "title": "product manager",
+        "company_name": "acme inc",
+        "current": true,
+        "start": "2020-05-01T00:00:00.000Z",
+        "company": { "domain": "acme.com" }
+      }
+    ],
+    "educations": [
+      {
+        "school_name": "stanford university",
+        "degree": "bachelor's degree, computer science",
+        "start": "2011-01-01T00:00:00.000Z",
+        "end": "2015-01-01T00:00:00.000Z",
+        "school": { "domain": "stanford.edu" }
+      }
+    ],
+    "skills": ["product management", "sql"]
+  }
+}
