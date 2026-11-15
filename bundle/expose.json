@@ -25,7 +25,7 @@
       "modifiers": [],
       "endpoints": [
         {
-          "slug": "person-email",
+          "slug": "expose.person-email",
           "display_name": "Person by email",
           "description": "Search Expose for a person by email address. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=person&email={{__INPUT__}}",
@@ -44,7 +44,7 @@
           "mapping": "person"
         },
         {
-          "slug": "person-phone",
+          "slug": "expose.person-phone",
           "display_name": "Person by phone",
           "description": "Search Expose for a person by phone number. Include the country code. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=person&phone={{__INPUT__}}",
@@ -63,7 +63,7 @@
           "mapping": "person"
         },
         {
-          "slug": "person-profile",
+          "slug": "expose.person-profile",
           "display_name": "Person by profile URL",
           "description": "Search Expose for a person by profile URL. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=person&profile_url={{__INPUT__}}",
@@ -82,7 +82,7 @@
           "mapping": "person"
         },
         {
-          "slug": "company-domain",
+          "slug": "expose.company-domain",
           "display_name": "Company by domain",
           "description": "Search Expose for a company by domain. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=company&domain={{__INPUT__}}",
@@ -101,7 +101,7 @@
           "mapping": "company"
         },
         {
-          "slug": "company-profile",
+          "slug": "expose.company-profile",
           "display_name": "Company by profile URL",
           "description": "Search Expose for a company by profile URL. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=company&profile_url={{__INPUT__}}",
@@ -120,7 +120,7 @@
           "mapping": "company"
         },
         {
-          "slug": "school-domain",
+          "slug": "expose.school-domain",
           "display_name": "School by domain",
           "description": "Search Expose for a school by domain. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=school&domain={{__INPUT__}}",
@@ -139,7 +139,7 @@
           "mapping": "school"
         },
         {
-          "slug": "school-profile",
+          "slug": "expose.school-profile",
           "display_name": "School by profile URL",
           "description": "Search Expose for a school by profile URL. One completed search uses one Expose credit.",
           "endpoint_url": "https://expose.team/api/search?type=school&profile_url={{__INPUT__}}",

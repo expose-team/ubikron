@@ -44,6 +44,12 @@ In Ubikron, the enrichments show up on the matching entity:
 
 A name alone is not a search. A phone number needs a country code.
 
+Try one search from the terminal. `--input` is `property=value`, and the property name is the entity's main property (`email` for an email address). One completed search uses one Expose credit.
+
+```bash
+mimic providers endpoints test expose expose.person-email --input email=jane@example.com
+```
+
 The person card draws the name, emails, phones, aliases, profiles, employer domains, and school domains. The company and school cards draw the domain, websites, and profile URLs. Company and school names stay text, because this provider only uses Ubikron's built-in entity types.
 
 ## Keys for a team

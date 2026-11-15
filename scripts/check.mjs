@@ -165,6 +165,7 @@ if (![...mappings].every((name) => ["person", "company", "school"].includes(name
   failures.push(`unexpected mapping names ${[...mappings].join(",")}`);
 }
 for (const endpoint of endpoints) {
+  if (!/^expose\.[a-z]+(-[a-z]+)*$/.test(endpoint.slug)) failures.push(`${endpoint.slug} must start with expose.`);
   if (!endpoint.endpoint_url.includes("{{__INPUT__}}")) failures.push(`${endpoint.slug} is missing the input placeholder`);
   if (endpoint.request_config.headers["x-api-key"] !== "{{api_key}}") failures.push(`${endpoint.slug} is missing the API key header`);
   if (JSON.stringify(bundle).includes("EXPOSE_API_KEY") || JSON.stringify(bundle).match(/sk_|mk_/)) {
